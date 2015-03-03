@@ -13,6 +13,7 @@ public class Oppgave2 {
 		System.out.println("Følgende forflyttninger er gjort: ");
 		flyttDisk(n, 'A', 'B', 'C');
 		System.out.println("Antall forflyttninger: " + antallForflyttninger);
+		System.out.println("Antall ganger den rekursive metoden ble kalt: " + antallKall);
 	}
 	
 	public static void flyttDisk(int n, char fraTaarn, char tilTaarn, char auxTaarn) {
@@ -22,9 +23,11 @@ public class Oppgave2 {
 		}
 		else{
 			flyttDisk(n - 1, fraTaarn, auxTaarn, tilTaarn);
+			antallKall++;
 			System.out.println("Flytt disk " + n + " fra " + fraTaarn + " til " + tilTaarn);
 			antallForflyttninger++;
 			flyttDisk(n - 1, auxTaarn, tilTaarn, fraTaarn);
+			antallKall++;
 		}
 	}
 }
