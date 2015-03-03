@@ -1,9 +1,9 @@
 import java.util.*;
 
-public abstract class Kort {
+public abstract class Kort implements Comparable<Kort>, Cloneable {
 	
-	private String lastName;
-	private String firstName;
+	protected String lastName;
+	protected String firstName;
 	
 	private int pinCode;
 	
@@ -24,10 +24,30 @@ public abstract class Kort {
 		this.pinCode = pin;
 		this.kortNummer = ++antallKort;
 		
-		this.dateCreated = new GregorianCalendar();
-		
+		this.dateCreated = new GregorianCalendar();	
 	}
 	
+	public int compareTo(Kort k) {
+		if(this.lastName.equals(k.lastName))
+			if(this.firstName.equals(k.firstName))
+				return 0;
+			else
+				return this.firstName.compareTo(k.firstName);
+		else
+			return this.lastName.compareTo(k.lastName);
+	}
+	
+	public Object clone() throws CloneNotSupportedException {
+    	Kort kortClone = (Kort)super.clone();
+    	kortClone.lastName = new String(this.lastName);
+    	kortClone.firstName = new String(this.firstName);
+    	kortClone.pinCode = (this.pinCode);
+    	kortClone.kortNummer = (this.kortNummer);
+    	kortClone.dateCreated = this.dateCreated;
+    	kortClone.cardClosed = this.cardClosed;
+    	return kortClone;
+	}
+    	
 	public boolean isSperret() {
 		return cardClosed;
 	}
@@ -57,5 +77,9 @@ public abstract class Kort {
 	
 	public boolean officeTime() {
 		return false;
+	}
+	
+	public int getCardNumber() {
+		return kortNummer;
 	}
 }
