@@ -12,17 +12,21 @@ public class SnuTekst {
 		System.out.println("Antall tegn som ble snudd: " + antallTegn);
 	}
 	
-	public static void baklengs(String tekst) {
-		int lengde = tekst.length();
-		if(lengde == 1){
+	public static void baklengs(String tekst, int siste) {
+		if(siste == 0){
 			System.out.println(tekst.charAt(0));
 			antallTegn++;
 		}
 		else {
-			System.out.print(tekst.charAt(lengde - 1));
-			tekst = tekst.substring(0, tekst.length()-1);
+			System.out.print(tekst.charAt(siste));
 			antallTegn++;
-			baklengs(tekst);
+			siste--;
+			baklengs(tekst, siste);
 		}
+	}
+	
+	public static void baklengs(String tekst) {
+			baklengs(tekst, tekst.length()-1);
+		
 	}
 }
